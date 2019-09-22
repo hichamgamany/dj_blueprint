@@ -1,0 +1,27 @@
+{% extends 'blog_base.html' %}
+{% block title %}Delete {{ post.title }} ?{% endblock %}
+{% load static %}
+{% block content %}
+    <div class="uk-container uk-margin-large-top">
+        <h3 class="uk-heading-bullet text-light uk-text-warning uk-text-uppercase">Delete {{ post.title }} ?</h3>
+        <div uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 180">
+            <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@m uk-margin-large-top" uk-grid>
+                <div class="uk-flex-first@s uk-card-media-left uk-cover-container">
+                    <img src="{{ post.featured_image.url }}" alt="contact-us" uk-cover>
+                    <canvas width="600" height="400"></canvas>
+                </div>
+                <div class="uk-card-body uk-align-center">
+                    <form action="." method="post">
+                        {% csrf_token %}
+                        <h3 class="uk-text-center text-light">Do you really want to delete {{ object.title }}</h3>
+                        <input class="uk-button uk-nav uk-button-default uk-button-medium uk-width-1-1 uk-margin-small-bottom"
+                               type="submit"
+                               value="Yes">
+                        <a class="uk-button uk-nav uk-button-default uk-button-medium uk-width-1-1"
+                           href="{% url 'post_list' %}">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

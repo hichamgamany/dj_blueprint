@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}{{ user.first_name | capfirst }} {{ user.last_name | upper }} | Profile{% endblock %}
+{% block content %}
+    <div class="uk-container">
+        <div uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 180">
+            <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@m uk-margin-large-top" uk-grid>
+                <div class="uk-flex-first@s uk-card-media-left uk-cover-container">
+                    <img src="{% static 'images/contact-us.png' %}" alt="contact-us" uk-cover>
+                    <canvas width="600" height="400"></canvas>
+                </div>
+                <div class="uk-card-body uk-align-center">
+                    <h3 class="uk-heading-bullet text-light uk-text-uppercase">
+                        {{ user.first_name | capfirst }} {{ user.last_name | upper }} | Profile
+                    </h3>
+                    <hr class="uk-card-divider">
+
+                    <form class="uk-grid-small" uk-grid action="."
+                          method="POST"
+                          novalidate
+                          enctype="multipart/form-data">{% csrf_token %}
+
+                        <div class="uk-width-1-2@s">
+                            <label class="uk-form-label">{{ u_form.first_name.label_tag }}</label>
+                            {% render_field u_form.first_name|attr:"class:uk-input" %}
+                            {% for error in u_form.first_name.errors %}
+                                <small class="uk-text-danger">{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                        <div class="uk-width-1-2@s">
+                            <label class="uk-form-label">{{ u_form.last_name.label_tag }}</label>
+                            {% render_field u_form.last_name|attr:"class:uk-input" %}
+                            {% for error in u_form.last_name.errors %}
+                                <small class="uk-text-danger">{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                        <div class="uk-width-1-2@s">
+                            <label class="uk-form-label">{{ u_form.username.label_tag }}</label>
+                            {% render_field u_form.username|attr:"class:uk-input" %}
+                            {% for error in u_form.username.errors %}
+                                <small class="uk-text-danger">{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                        <div class="uk-width-1-2@s">
+                            <label class="uk-form-label">{{ u_form.email.label_tag }}</label>
+                            {% render_field u_form.email|attr:"class:uk-input" %}
+                            {% for error in u_form.email.errors %}
+                                <small class="uk-text-danger">{{ error }}</small>
+                            {% endfor %}
+                        </div>
+
+                        <div class="uk-width-1-1">
+{#                            <label class="uk-form-label">{{ p_form.image.label_tag }}</label>#}
+                            <img class="uk-border-circle" src="{{ user.profile.image.url }}" width="80" alt="{{ user.username }}">
+                            <hr>
+                            {% render_field p_form.image|append_attr:"class:uk-button uk-button-default uk-width-1-1" type="file" %}
+                            {% for error in p_form.image.errors %}
+                                <small class="uk-text-danger">{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                        <div class="uk-width-1-1">
+                            <button type="submit"
+                                    class="uk-button uk-button-default uk-button-medium uk-width-1-1">
+                                Update
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

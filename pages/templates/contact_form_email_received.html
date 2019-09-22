@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="uk-container uk-margin-large-top">
+        <h1 class="uk-heading-bullet uk-text-uppercase">Contact Us</h1>
+        <div uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 180">
+            <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@m uk-margin-large-top" uk-grid>
+                <div class="uk-flex-first@s uk-card-media-left uk-cover-container">
+                    <img src="{% static 'images/contact-us.png' %}" alt="contact-us" uk-cover>
+                    <canvas width="600" height="400"></canvas>
+                </div>
+                <div class="uk-card-body uk-align-center">
+                    <p class="uk-text-center uk-text-success">Thank you, your email has been received.</p>
+                    <p class="uk-text-center">We will get back to you soon</p>
+                    <hr class="uk-divider">
+                    <a href="{% url 'contact_view' %}" class="uk-button uk-nav uk-button-default uk-button-medium uk-width-1-1">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

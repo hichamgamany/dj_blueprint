@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="uk-container">
+        <div uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 180">
+            <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@m uk-margin-large-top" uk-grid>
+                <div class="uk-flex-first@s uk-card-media-left uk-cover-container">
+                    <img src="{% static 'images/contact-us.png' %}" alt="contact-us" uk-cover>
+                    <canvas width="600" height="400"></canvas>
+                </div>
+                <div class="uk-card-body uk-align-center">
+                    <h1 class="uk-heading-bullet text-light uk-text-uppercase">Logged Out</h1>
+                    <small>Do you want to login again ? <a class=" uk-button-text" href="{% url 'sign_in' %}">Sign In</a></small>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

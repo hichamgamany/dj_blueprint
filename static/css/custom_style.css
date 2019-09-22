@@ -1,0 +1,18 @@
+.uk-checkbox:focus, .uk-select:focus, .uk-input:focus, .uk-textarea:focus {
+    border-color: #302b20!important;
+}
+.uk-checkbox:checked {
+    background-color: #302b20!important;
+}
+.text-info-muted {
+    color: #a3a3a3;
+    font-weight: lighter;
+}
+.text-light {
+    font-weight: lighter;
+}
+
+.uk-subnav-pill>.uk-active>a {
+    background-color: #302b20!important;
+    color: #fff;
+}

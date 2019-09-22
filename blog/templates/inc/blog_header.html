@@ -1,0 +1,96 @@
+{% load static %}
+
+<!-- Menu mobile -->
+<div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
+    <nav class="uk-navbar-container uk-box-shadow-small  uk-hidden@l" uk-navbar>
+        <div class="uk-navbar-left">
+            <a class="uk-navbar-toggle" href="#" uk-toggle="target: #menu-mobile">
+                <span uk-navbar-toggle-icon></span>
+            </a>
+        </div>
+        <div class="uk-navbar-center">
+            <a href="/" class="uk-navbar-item uk-logo">
+                <img uk-svg width="40" height="40" class="logo" src="{% static 'images/logo.svg' %}" alt="logo"/>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<!-- Side Menu for mobile -->
+<div class="uk-offcanvas-content">
+    <div id="menu-mobile" uk-offcanvas="mode: push; overlay: true">
+        <div class="uk-offcanvas-bar">
+            <button class="uk-offcanvas-close" type="button" uk-close></button>
+            <ul class="uk-nav uk-nav-default">
+                <li class="uk-nav-header">Dashboard</li>
+                <li><a href="{% url 'home_view' %}"><span class="uk-margin-small-right" uk-icon="icon: home"></span>Home</a></li>
+                <li><a href="{% url 'posts_featured' %}"><span class="uk-margin-small-right" uk-icon="icon: star"></span>Featured</a></li>
+                <li><a href="{% url 'post_list' %}"><span class="uk-margin-small-right" uk-icon="icon: list"></span>Articles</a></li>
+                <li><a href="{% url 'contact_view' %}"><span class="uk-margin-small-right" uk-icon="icon: mail"></span>Contact</a></li>
+                <li class="uk-nav-divider"></li>
+                {% if user.is_authenticated %}
+                    {% if user.profile.image %}
+                        <li class="uk-nav-header uk-margin-remove-top"><a href="{% url 'profile' %}">
+                            <img class="uk-border-circle uk-margin-small-right"
+                                 src="{{ user.profile.image.url }}"
+                                 alt="{{ user.username }} image"
+                                 width="40px"
+                                 height="40px">
+                            {{ user.first_name }}
+                        </a></li>
+                        <li class="uk-nav-divider"></li>
+                    {% endif %}
+                    <li><a href="{% url 'create_post' %}"><span class="uk-margin-small-right" uk-icon="icon: plus"></span>Add Article</a></li>
+                    <li><a href="{% url 'user_post_list' %}"><span class="uk-margin-small-right" uk-icon="icon: list"></span>My Articles</a></li>
+                    <li><a href="{% url 'profile' %}"><span class="uk-margin-small-right" uk-icon="icon: users"></span>Profile</a></li>
+                    <li><a href="{% url 'logout' %}"><span class="uk-margin-small-right" uk-icon="icon: sign-out"></span>Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'sign_in' %}"><span class="uk-margin-small-right" uk-icon="icon: sign-in"></span>Sign In</a></li>
+                    <li><a href="{% url 'sign_up' %}"><span class="uk-margin-small-right" uk-icon="icon: user"></span>Sign Up</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<!-- Menu desktop -->
+<div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
+    <nav class="uk-navbar-container uk-box-shadow-small uk-visible@l" uk-navbar>
+        <div class="uk-navbar-left uk-margin-large-left">
+            <ul class="uk-navbar-nav">
+                <li><a href="{% url 'home_view' %}">Home</a></li>
+                <li><a href="{% url 'posts_featured' %}">Featured</a></li>
+                <li><a href="{% url 'post_list' %}">Articles</a></li>
+                <li><a href="{% url 'contact_view' %}">Contact</a></li>
+            </ul>
+        </div>
+        <div class="uk-navbar-center">
+            <a href="{% url 'home_view' %}" class="uk-navbar-item uk-logo">
+                <img uk-svg width="40" height="40" src="{% static 'images/logo.svg' %}" alt="logo"/>
+            </a>
+        </div>
+        <div class="uk-navbar-right uk-margin-large-right">
+            <ul class="uk-navbar-nav">
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'create_post' %}">Add Article</a></li>
+                    <li><a href="{% url 'user_post_list' %}">My Articles</a></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                        {% if user.profile.image %}
+                    <li><a href="{% url 'profile' %}">
+                            <img class="uk-border-circle uk-margin-small-right"
+                                 src="{{ user.profile.image.url }}"
+                                 alt="{{ user.username }} image"
+                                 width="40px"
+                                 height="40px">
+                        </a></li>
+                        {% endif %}
+                {% else %}
+                    <li><a href="{% url 'sign_in' %}">Sign In</a></li>
+                    <li><a href="{% url 'sign_up' %}">Sign Up</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+</div>

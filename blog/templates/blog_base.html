@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>{% block title %}{{ title }}{% endblock %}</title>
+	{% include 'inc/head.html' %}
+</head>
+<body>
+{% if messages %}
+{% for message in messages %}
+	<div id="message_alerts"
+         class="uk-alert-{{ message.tags }} uk-margin-remove"
+         uk-alert="animation: true; duration: 500; sel-close: uk-alert-close">
+		<a class="uk-alert-close" uk-close></a>
+		<p class="uk-text-center">{{ message }}</p>
+	</div>
+{% endfor %}
+{% endif %}
+{% include 'inc/blog_header.html' %}
+{% block content %}
+
+	<!-- content goes here -->
+{% endblock %}
+{% include 'inc/footer.html' %}
+{% include 'inc/scripts.html' %}
+
+</body>
+</html>

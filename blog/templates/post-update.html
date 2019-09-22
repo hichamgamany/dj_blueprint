@@ -1,0 +1,77 @@
+{% extends "blog_base.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% block title %}Update {{ post.title }}{% endblock %}
+
+{% block content %}
+    <div class="uk-container uk-margin-large-top">
+        <h3 class="uk-heading-bullet text-light uk-text-info uk-text-uppercase">Update {{ post.title }}</h3>
+        <div uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 180">
+            <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@m uk-margin-large-top" uk-grid>
+                <div class="uk-flex-first@s uk-card-media-left uk-cover-container">
+                    <img src="{{ post.featured_image.url }}" alt="contact-us" uk-cover>
+                    <canvas width="600" height="400"></canvas>
+                </div>
+                <div class="uk-card-body uk-align-center">
+                    <form method="post" enctype="multipart/form-data"> {% csrf_token %}
+                        <ul uk-accordion>
+                            <li>
+                                <a class="uk-accordion-title text-light" href="#">General</a>
+                                <div class="uk-accordion-content">
+                                    <div class="uk-width-1-1@m uk-margin-small">
+                                        <label for="title">Title</label>
+                                        {% render_field form.title|append_attr:"class:uk-input" id="title" type="text" placeholder="Title" %}
+                                    </div>
+                                    <div class="uk-width-1-1@m uk-margin-small">
+                                        <label for="description">Description</label>
+                                        {% render_field form.description|append_attr:"class:uk-input" id="description" type="text" placeholder="Description" %}
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="uk-accordion-title text-light" href="#">Content</a>
+                                <div class="uk-accordion-content">
+                                    <div class="uk-width-1-1@m uk-margin-small">
+                                        {% render_field form.content|append_attr:"class:uk-textarea" id="content" type="text" placeholder="Content" %}
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="uk-accordion-title text-light" href="#">Featured image</a>
+                                <div class="uk-accordion-content">
+                                    <div class="uk-width-1-1@m uk-margin-small">
+                                        <img src="{{ post.featured_image.url }}" width="100" alt="{{ post.slug }}">
+                                        {% render_field form.featured_image|append_attr:"class:uk-button uk-button-default uk-width-1-1" type="file" placeholder="Image" %}
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="uk-accordion-title text-light" href="#">Filters</a>
+                                <div class="uk-accordion-content">
+                                    <div class="uk-grid-small" uk-grid>
+                                        <div class="uk-width-1-1@m ">
+                                            <small><kbd>command + click</kbd>for multiple selection</small>
+                                        </div>
+                                        <div class="uk-width-1-2@m ">
+                                            <label for="categories">Categories</label>
+                                            {% render_field form.categories|append_attr:"class:uk-select" id="categories" type="text" placeholder="Categories" %}
+                                        </div>
+                                        <div class="uk-width-1-2@m">
+                                            <label for="tags">Tags</label>
+                                            {% render_field form.tags|append_attr:"class:uk-select" id="tags" type="text" placeholder="Tags" %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="uk-width-1-1@m uk-margin-small">
+                            <button class="uk-button uk-button-default uk-width-1-1 uk-margin-small" type="submit">Update</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

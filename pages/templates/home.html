@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+    <!-- Slideshow -->
+    <div class="uk-position-relative uk-visible-toggle uk-light"
+         tabindex="-1"
+         uk-slideshow=" max-height: 450; animation: push; autoplay: true; finite: false">
+        <ul class="uk-slideshow-items">
+            {% for post in posts %}
+                <li>
+                    <img src="{{ post.featured_image.url }}" alt="" uk-cover>
+                    <div class="uk-position-center uk-position-small uk-text-center uk-light">
+                        <h2 class="uk-margin-remove text-light">{{ post.title | upper }}</h2>
+                        <p class="uk-margin-remove text-light">{{ post.description | capfirst | truncatechars:40 }}
+                            <a class="text-light" href="{{ post.get_absolute_url }}">More</a>
+                        </p>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+        <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+    </div>
+    <!-- End Slideshow -->
+    <div class="uk-container uk-margin-medium-top">
+        <div uk-height-viewport>
+            <div uk-filter="target: .js-filter">
+
+                <hr>
+                <ul class="uk-subnav uk-subnav-pill">
+                    <li class="uk-active" uk-filter-control="sort: data-date; order: desc"><a href="#">Newest</a></li>
+                    <li uk-filter-control="sort: data-date"><a href="#">Oldest</a></li>
+                </ul>
+                <hr>
+                <ul class="js-filter uk-child-width-1-2@m uk-child-width-1-3@l uk-text-center" uk-grid>
+                    {% for post in posts %}
+                        <li data-date="{{ post.created }}">
+                            <div uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 180">
+                                <div class="uk-card uk-card-default ">
+                                    <div class="uk-card-media-top">
+                                        <a href="{{ post.get_absolute_url }}"><img src="{{ post.featured_image.url }}" alt=""></a>
+                                    </div>
+                                    <div class="uk-card-header">
+                                        <p class="uk-h5 uk-text-left uk-heading-bullet uk-text-uppercase">{{ post.title }}</p>
+                                        <p class="uk-text-left uk-align-left text-info-muted uk-text-small uk-margin-remove">
+                                            Posted by: {{ post.author.first_name }} {{ post.author.last_name | capfirst }}
+                                        </p>
+                                    </div>
+                                    <div class="uk-card-body">
+                                        <p class="text-info-muted uk-margin-remove-top uk-text-small uk-text-left">
+                                            {{ post.description | truncatechars:40 | capfirst }}
+                                            <a class="uk-button-text" href="{{ post.get_absolute_url }}">More</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

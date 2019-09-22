@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+    <div class="uk-container">
+        <div uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 180">
+            <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@m uk-margin-large-top" uk-grid>
+                <div class="uk-flex-first@s uk-card-media-left uk-cover-container">
+                    <img src="{% static 'images/contact-us.png' %}" alt="contact-us" uk-cover>
+                    <canvas width="600" height="400"></canvas>
+                </div>
+                <div class="uk-card-body uk-align-center">
+                    <h1 class="uk-heading-bullet text-light uk-text-uppercase">Sign In</h1>
+                    <small>Already have an account? <a class=" uk-button-text" href="{% url 'sign_up' %}">Sign Up</a></small>
+                    <hr class="uk-card-divider">
+                    <form class="uk-grid-small" uk-grid method="POST" novalidate>{% csrf_token %}
+                        {% if form.non_field_errors %}
+                            <div class="uk-width-1-1">
+                                <div class="uk-alert uk-alert-danger">
+                                    {% for error in form.non_field_errors %}
+                                        <p class="text-light uk-text-small">{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        <div class="uk-width-1-2@s">
+                            <label class="uk-form-label">{{ form.username.label_tag }}</label>
+                            {% render_field form.username|attr:"class:uk-input" %}
+                            {% for error in form.username.errors %}
+                                <small class="uk-text-danger">{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                        <div class="uk-width-1-2@s">
+                            <label class="uk-form-label">{{ form.password.label_tag }}</label>
+                            {% render_field form.password|attr:"class:uk-input"|attr:"type:password"|attr:"autocomplete: true" %}
+                            {% for error in form.password.errors %}
+                                <small class="uk-text-danger">{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                        <div class="uk-width-1-1">
+                            <button type="submit"
+                                    class="uk-button uk-button-default uk-button-medium uk-width-1-1">
+                                Sign Up
+                            </button>
+                        </div>
+                    <small>Forgot your password? <a class=" uk-button-text" href="{% url 'password_reset' %}">Reset</a></small>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

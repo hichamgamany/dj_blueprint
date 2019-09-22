@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+    <div class="uk-container uk-margin-medium-top">
+        <div uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 180">
+            <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@m uk-margin-large-top" uk-grid>
+                <div class="uk-flex-first@s uk-card-media-left uk-cover-container">
+                    <img src="{% static 'images/contact-us.png' %}" alt="contact-us" uk-cover>
+                    <canvas width="600" height="400"></canvas>
+                </div>
+                <div class="uk-card-body uk-align-center">
+                    <h1 class="uk-heading-bullet text-light uk-text-uppercase">Contact Us</h1>
+                    <hr class="uk-card-divider uk-margin-remove-top">
+                    <form class="uk-grid-small" uk-grid action="." method="POST" novalidate>{% csrf_token %}
+                        <div class="uk-width-1-2@s">
+                            {% render_field form.first_name|append_attr:"class:uk-input" id="first_name" type="text" placeholder="First Name" %}
+                        </div>
+                        <div class="uk-width-1-2@s">
+                            {% render_field form.last_name|append_attr:"class:uk-input" id="last_name" type="text" placeholder="Last Name" %}
+                        </div>
+                        <div class="uk-width-1-1">
+                            {% render_field form.email|append_attr:"class:uk-input" id="email" type="email" placeholder="Email" %}
+                        </div>
+                        <div class="uk-width-1-1">
+                            {% render_field form.message|append_attr:"class:uk-textarea" id="message" rows='4' type="text" placeholder="Message" %}
+                        </div>
+                        <div class="uk-width-1-1">
+                            <button type="submit"
+                                    class="uk-button uk-button-default uk-button-medium uk-width-1-1">
+                                Send
+                            </button>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
