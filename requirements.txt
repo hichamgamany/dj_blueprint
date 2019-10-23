@@ -9,7 +9,7 @@ django-storages==1.7.2
 django-widget-tweaks==1.4.5
 docutils==0.15.2
 jmespath==0.9.4
-Pillow==6.1.0
+Pillow==6.2.0
 python-dateutil==2.8.0
 python-decouple==3.1
 pytz==2019.2
